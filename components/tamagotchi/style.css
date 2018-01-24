@@ -43,8 +43,8 @@
   left: 5%;
   width: 90%;
   height: 2em;
-  background-color: hsla(220, 20%, 10%, 0.4);
-  box-shadow: 0 0 25px hsla(220, 20%, 10%, 1);
+  background-color: hsla(220, 20%, 10%, 0.3);
+  box-shadow: 0 0 40px hsla(220, 20%, 10%, 0.8);
   border-radius: 50%;
   z-index: -10;
 }
@@ -71,14 +71,19 @@
   justify-self: center;
   align-self: center;
   text-align: center;
-  opacity: 0.75;
+  opacity: 0.7;
   filter: grayscale(1);
 }
 
 .tamagotchi__input {
   width: 100%;
-  margin-top: 0.25em;
+  margin-top: 0.5em;
   background-color: hsl(190, 30%, 80%);
+}
+
+.tamagotchi__input:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px hsl(190, 10%, 50%);
 }
 
 .tamagotchi__name {

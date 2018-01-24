@@ -60,12 +60,6 @@ class Tamagotchi extends React.Component {
           burnout={burnout}
           updateData={this.updateData}
         />
-        <h2>Key:</h2>
-        <ul>
-          <li>💜: Compliment their code</li>
-          <li>🐶: Send them a cute gif</li>
-          <li>⭐️: Star their side-project</li>
-        </ul>
       </div>
     );
   }

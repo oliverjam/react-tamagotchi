@@ -25,10 +25,16 @@ class Search extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="username">Please choose a user</label>
           <input
+            ref={x => {
+              console.log(x);
+              this.myInput = x;
+            }}
             id="username"
             className="tamagotchi__input"
             value={this.state.username}
             onChange={this.handleChange}
+            autoFocus
+            autoComplete="false"
           />
         </form>
       );

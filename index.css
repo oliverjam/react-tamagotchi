@@ -50,7 +50,7 @@ img {
   margin: 0 auto;
   padding: 2em;
   display: grid;
-  grid-template-rows: auto auto 1fr auto;
-  grid-gap: 1.25em;
+  grid-template-rows: auto 1fr auto;
+  grid-gap: 2em;
   place-items: center;
 }
