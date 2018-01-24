@@ -1,0 +1,91 @@
+.tamagotchi {
+  position: relative;
+  width: 18em;
+  height: 22em;
+  padding: 4em 0;
+  display: grid;
+  grid-template-rows: 75% auto;
+  grid-gap: 1.5em;
+  justify-items: center;
+  font-family: 'VT323';
+  border-radius: 50%;
+  background-color: magenta;
+  background-image: radial-gradient(
+    hsl(290, 50%, 50%),
+    hsl(300, 60%, 40%),
+    hsl(310, 70%, 30%),
+    hsl(320, 80%, 20%)
+  );
+  border: solid 0.25em hsla(320, 80%, 20%, 0.25);
+}
+
+.tamagotchi::before {
+  box-sizing: border-box;
+  content: '';
+  position: absolute;
+  top: -1.2em;
+  left: calc(50% - 1em);
+  width: 2em;
+  height: 2em;
+  border: 0.5em solid hsl(320, 80%, 20%);
+  border-radius: 50%;
+  z-index: -10;
+}
+
+.tamagotchi__screen {
+  width: 60%;
+  padding: 0.5em;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2em 1fr 2em;
+  color: hsl(220, 20%, 20%);
+  background-color: hsl(220, 20%, 60%);
+  border-radius: 0.125em;
+  border: solid 0.25em hsl(220, 10%, 55%);
+  box-shadow: 0 0 0 2px hsla(220, 20%, 20%, 0.5),
+    0 0 15px hsla(50, 100%, 90%, 0.5);
+}
+
+.tamagotchi__img {
+  grid-column: 1 / 1;
+  grid-row: 2 / 3;
+  height: 100%;
+  font-size: 3em;
+  justify-self: center;
+  align-self: center;
+  text-align: center;
+  opacity: 0.75;
+  filter: grayscale(1);
+}
+
+.tamagotchi__name {
+  grid-row: 0 / 1;
+}
+
+.tamagotchi__motivation {
+  align-self: end;
+  grid-row: 3 / 4;
+}
+
+.tamagotchi__btn-group {
+  width: 50%;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.tamagotchi__btn {
+  width: 2em;
+  height: 2em;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid hsla(220, 10%, 60%, 0.4);
+  box-shadow: 0 2px 2px hsla(220, 20%, 20%, 0.4);
+  filter: grayscale(0.8);
+  transition: transform 0.1s;
+}
+
+.tamagotchi__btn:active {
+  transform: translateY(1px);
+}

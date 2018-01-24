@@ -11,11 +11,10 @@ class Search extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     getUser(this.state.username).then(data => {
-      console.log(data);
-      const { name, username, avatar_url: img, followers } = data;
+      const { name, login, avatar_url: img, followers } = data;
       this.props.updateParentState({
         name,
-        username,
+        login,
         img,
         followers,
         fetched: true,
@@ -31,6 +30,7 @@ class Search extends React.Component {
           id="username"
           value={this.state.username}
           onChange={this.handleChange}
+          style={{ marginLeft: '1em' }}
         />
       </form>
     );

@@ -1,50 +1,25 @@
 import React from 'react';
 import Search from './search';
-import Followers from './followers';
+import Motivation from './motivation';
 
 class App extends React.Component {
   state = {
     name: '',
-    username: '',
+    login: '',
     img: '',
     followers: 0,
     fetched: false,
-    burnout: false,
   };
-  updateData = ({ name, username, img, followers, fetched }) => {
-    this.setState({ name, username, img, followers, fetched });
-  };
-  toggleBurnout = () => {
-    this.setState(prevState => {
-      return { burnout: !prevState.burnout };
-    });
+  updateData = ({ name, login, img, followers, fetched }) => {
+    this.setState({ name, login, img, followers, fetched });
   };
   render() {
-    const { name, username, img, followers, burnout } = this.state;
-    if (burnout) {
-      return (
-        <div>
-          <span>{name} has burnt out and quit coding, oh no! 💔</span>
-        </div>
-      );
-    }
+    const { name, login, img, fetched } = this.state;
     return (
-      <div style={{ padding: '10vw' }}>
+      <div className="container">
+        <h1>Github Tamagotchi 🐙</h1>
         <Search updateParentState={this.updateData} />
-        {this.state.fetched && (
-          <div>
-            <span>{name || username}</span>
-            <img
-              src={img}
-              alt={`${name}'s profile pic`}
-              style={{ maxWidth: '100%' }}
-            />
-            <Followers
-              initialFollowers={followers}
-              toggleBurnout={this.toggleBurnout}
-            />
-          </div>
-        )}
+        <Motivation name={name || login} img={img} start={fetched} />
       </div>
     );
   }
