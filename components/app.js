@@ -1,6 +1,5 @@
 import React from 'react';
-import Search from './search';
-import Motivation from './motivation';
+import Tamagotchi from './tamagotchi';
 
 class App extends React.Component {
   state = {
@@ -18,8 +17,7 @@ class App extends React.Component {
     return (
       <div className="container">
         <h1>Github Tamagotchi 🐙</h1>
-        <Search updateParentState={this.updateData} />
-        <Motivation name={name || login} img={img} start={fetched} />
+        <Tamagotchi name={name || login} img={img} start={fetched} />
       </div>
     );
   }
