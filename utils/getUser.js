@@ -1,8 +1,8 @@
-import TOKEN from '../token';
+// import TOKEN from '../token';
 const BASE_URL = 'https://api.github.com';
 
 const getUser = username => {
-  const URL = `${BASE_URL}/users/${username}?access_token=${TOKEN}`;
+  const URL = `${BASE_URL}/users/${username}`;
   return fetch(URL) // eslint-disable-line no-undef
     .then(res => {
       if (res.status !== 200) {
