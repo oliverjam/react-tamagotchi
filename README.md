@@ -18,11 +18,20 @@ Try to:
 
 ### Stretch goals
 
-* Save your state to localstorage so you can leave the page and come back later
-* Make it look like a real Tamagotchi!
+- Save your state to localstorage so you can leave the page and come back later
+- Make it look like a real Tamagotchi!
+
+### Setup
+Checkout our guide to setting up a react project with Parcel:
+### :sparkles: [CLICK ME](./parcel-setup.md) :sparkles:
+
+### Assets
+- If you want you can use [our sprite sheet](./tamagotchi.png). There's instructions on [how to use it here](https://gamedevelopment.tutsplus.com/tutorials/an-introduction-to-spritesheet-animation--gamedev-13099).
+- Here is instructions on how to [insert assets with parcel](https://parceljs.org/assets.html).
+
 
 ## Deployment
 
 You can deploy your app to any static host ([Netlify](https://netlify.com), Github Pages, [surge.sh](https://surge.sh)).
 
-You'll need a build script to tell Parcel to build a production `dist` directory that you can deploy: `parcel build index.html --public-url ./`
+[Checkout our instructions here.](./deploying.md)
