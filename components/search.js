@@ -1,5 +1,5 @@
 import React from 'react';
-import getUser from '../../utils/getUser';
+import getUser from '../utils/getUser';
 
 class Search extends React.Component {
   state = {

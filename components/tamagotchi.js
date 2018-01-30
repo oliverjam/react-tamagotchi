@@ -1,5 +1,5 @@
 import React from 'react';
-import TamagotchiView from './view';
+import TamagotchiView from './tamagotchiView';
 
 const DEC_INTERVAL = 5000;
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import heartIcon from './assets/heart.svg';
+import heartIcon from '../assets/heart.svg';
 
 const MotivationBar = ({ health }) => {
   const hearts = Array.from({ length: health }, (item, i) => (
