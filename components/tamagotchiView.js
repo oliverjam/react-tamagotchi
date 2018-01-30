@@ -1,5 +1,5 @@
 import React from 'react';
-import './style.css';
+import './tamagotchi.style.css';
 
 import Screen from './screen';
 import Controls from './controls';
