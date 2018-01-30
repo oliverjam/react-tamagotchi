@@ -11,13 +11,13 @@ class Tamagotchi extends React.Component {
     motivation: 0,
     burnout: false,
   };
-  // passed to child as a prop so it can update the state here
+  // passed to child as a prop so <Search /> can update the state here
   // see https://reactjs.org/docs/lifting-state-up.html
   updateData = data => {
     if (data.error) {
       return this.setState({ error: true });
     }
-    this.setState({ data, fetched: true });
+    return this.setState({ data, fetched: true });
   };
   startTimer = () => {
     this.setState({ motivation: 5 });
@@ -38,8 +38,8 @@ class Tamagotchi extends React.Component {
       );
     }, DEC_INTERVAL);
   };
+  // passed to child so <Controls /> can update the state here
   incrementMotivation = inc => {
-    // ensure we don't go higher than 5
     if (this.state.motivation + inc > 5) {
       return this.setState({ motivation: 5 });
     }

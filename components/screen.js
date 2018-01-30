@@ -12,6 +12,7 @@ const ErrorView = () => (
 )
 
 const Screen = ({ error, name, img, burnout, motivation, updateData }) => {
+  // render a different view if there's a fetch error
   if (error) return <ErrorView />
   return (
     <div className="tamagotchi__screen">
