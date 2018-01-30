@@ -48,7 +48,7 @@ img {
 .container {
   max-width: 40em;
   margin: 0 auto;
-  padding: 2em;
+  padding: calc(1em + 1vw);
   display: grid;
   grid-template-rows: auto 1fr auto;
   grid-gap: 2em;

@@ -1,5 +1,6 @@
 .tamagotchi {
   position: relative;
+  font-size: calc(0.6em + 1vw);
   width: 18em;
   height: 22em;
   padding: 4em 0;
@@ -51,6 +52,7 @@
 
 .tamagotchi__screen {
   width: 55%;
+  height: 100%;
   padding: 0.5em;
   display: grid;
   grid-template-columns: 1fr;
