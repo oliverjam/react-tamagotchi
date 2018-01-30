@@ -17,7 +17,7 @@ class Tamagotchi extends React.Component {
     this.setState({ data, fetched: true });
   };
   startTimer = () => {
-    this.setState({ motivation: 5 });
+    this.setState({ motivation: 500 });
     // start a timer to reduce motivation by 1 every 5s
     this.interval = setInterval(() => {
       this.setState(
