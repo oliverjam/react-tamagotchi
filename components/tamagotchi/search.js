@@ -18,6 +18,8 @@ class Search extends React.Component {
     this.setState({ username: '' });
   };
   render() {
+    // if we have a name prop then we've already fetched
+    // so show the name instead of the form
     if (this.props.name) {
       return <div className="tamagotchi__name">{this.props.name}</div>;
     } else {
