@@ -9,9 +9,6 @@ const getUser = username => {
         throw new Error('Non-200 API response');
       }
       return res.json();
-    })
-    .catch(err => {
-      console.error(err);
     });
 };
 

@@ -1,8 +1,18 @@
 import React from 'react';
 import Search from './search';
 import MotivationBar from './motivationBar';
+import skullIcon from '../assets/skull.svg';
 
-const Screen = ({ name, img, burnout, motivation, updateData }) => {
+const ErrorView = () => (
+  <div className="tamagotchi__screen">
+    <div>There’s been a terrible mistake</div>
+    <img className="tamagotchi__img" src={skullIcon} alt="A skull and crossbones" />
+    <div>Please try again :)</div>
+  </div>
+)
+
+const Screen = ({ error, name, img, burnout, motivation, updateData }) => {
+  if (error) return <ErrorView />
   return (
     <div className="tamagotchi__screen">
       {name

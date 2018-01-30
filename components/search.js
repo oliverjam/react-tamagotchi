@@ -10,11 +10,15 @@ class Search extends React.Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    getUser(this.state.username).then(res => {
-      const { name, login, avatar_url: img } = res;
-      const data = { name, login, img };
-      this.props.updateParentState(data);
-    });
+    getUser(this.state.username)
+      .then(res => {
+        const { name, login, avatar_url: img } = res;
+        const data = { name, login, img };
+        this.props.updateParentState(data);
+      })
+      .catch(err => {
+        this.props.updateParentState({ error: true, message: err });
+      });
     this.setState({ username: '' });
   };
   render() {

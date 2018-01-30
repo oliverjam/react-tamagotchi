@@ -5,15 +5,17 @@ import Screen from './screen';
 import Controls from './controls';
 
 const TamagotchiView = ({
-  img,
+  error,
   name,
-  motivation,
+  img,
   burnout,
-  incrementMotivation,
+  motivation,
   updateData,
+  incrementMotivation,
 }) => (
   <div className="tamagotchi">
     <Screen
+      error={error}
       name={name}
       img={img}
       burnout={burnout}

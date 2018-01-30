@@ -1,7 +1,7 @@
 import React from 'react';
 import TamagotchiView from './tamagotchiView';
 
-const DEC_INTERVAL = 5000;
+const DEC_INTERVAL = 6000;
 
 class Tamagotchi extends React.Component {
   state = {
@@ -14,10 +14,13 @@ class Tamagotchi extends React.Component {
   // passed to child as a prop so it can update the state here
   // see https://reactjs.org/docs/lifting-state-up.html
   updateData = data => {
+    if (data.error) {
+      return this.setState({ error: true });
+    }
     this.setState({ data, fetched: true });
   };
   startTimer = () => {
-    this.setState({ motivation: 500 });
+    this.setState({ motivation: 5 });
     // start a timer to reduce motivation by 1 every 5s
     this.interval = setInterval(() => {
       this.setState(
@@ -60,9 +63,10 @@ class Tamagotchi extends React.Component {
     clearInterval(this.interval);
   }
   render() {
-    const { data: { name, img }, motivation, burnout } = this.state;
+    const { error, data: { name, img }, motivation, burnout } = this.state;
     return (
       <TamagotchiView
+        error={error}
         name={name}
         motivation={motivation}
         img={img}
