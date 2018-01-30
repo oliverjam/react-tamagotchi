@@ -62,16 +62,14 @@ class Tamagotchi extends React.Component {
   render() {
     const { data: { name, img }, motivation, burnout } = this.state;
     return (
-      <div>
-        <TamagotchiView
-          name={name}
-          motivation={motivation}
-          img={img}
-          incrementMotivation={this.incrementMotivation}
-          burnout={burnout}
-          updateData={this.updateData}
-        />
-      </div>
+      <TamagotchiView
+        name={name}
+        motivation={motivation}
+        img={img}
+        incrementMotivation={this.incrementMotivation}
+        burnout={burnout}
+        updateData={this.updateData}
+      />
     );
   }
 }
