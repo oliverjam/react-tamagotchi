@@ -18,25 +18,19 @@ class Search extends React.Component {
     this.setState({ username: '' });
   };
   render() {
-    // if we have a name prop then we've already fetched
-    // so show the name instead of the form
-    if (this.props.name) {
-      return <div className="tamagotchi__name">{this.props.name}</div>;
-    } else {
-      return (
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="username">Please choose a user</label>
-          <input
-            id="username"
-            className="tamagotchi__input"
-            value={this.state.username}
-            onChange={this.handleChange}
-            autoFocus
-            autoComplete="false"
-          />
-        </form>
-      );
-    }
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label htmlFor="username">Please choose a user</label>
+        <input
+          id="username"
+          className="tamagotchi__input"
+          value={this.state.username}
+          onChange={this.handleChange}
+          autoFocus
+          autoComplete="false"
+        />
+      </form>
+    );
   }
 }
 
