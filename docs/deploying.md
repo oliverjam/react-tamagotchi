@@ -13,11 +13,13 @@ Add the following build script to your `package.json`:
 
 More info in the [Parcel docs](https://parceljs.org/production.html)
 
-## Surge Instuctions
+## Surge Instructions
+
 - [Surge deploying](https://surge.sh/)
 - [Surge setup for client side routing](https://surge.sh/help/adding-a-200-page-for-client-side-routing)
 
-## Netlify Instuctions
+## Netlify Instructions
+
 - [Netlify steps for continuous deployment](https://www.netlify.com/docs/continuous-deployment/)
 - [Netlify setup for client side routing](https://www.netlify.com/docs/redirects/#history-pushstate-and-single-page-apps)
 - If you get build errors using Parcel with Netlify it may be because they build using an older Node version by default (v6!). You can tell them to use whatever version you're using by setting an environment variable called `NODE_ENV` in the 'Deploy Settings' (scroll down to 'Build environment variables').
