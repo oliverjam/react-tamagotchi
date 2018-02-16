@@ -63,11 +63,11 @@ class Tamagotchi extends React.Component {
     clearInterval(this.interval);
   }
   render() {
-    const { error, data: { name, img }, motivation, burnout } = this.state;
+    const { error, data: { name, login, img }, motivation, burnout } = this.state;
     return (
       <TamagotchiView
         error={error}
-        name={name}
+        name={name || login}
         motivation={motivation}
         img={img}
         incrementMotivation={this.incrementMotivation}
