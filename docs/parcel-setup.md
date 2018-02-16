@@ -9,17 +9,17 @@ If you want to understand what everything does then have a look at the [what eve
 ### Install
 
 1. `npm init -y` to initialise your repo
-2. `npm i -D parcel-bundler babel-preset-env babel-preset-react babel-preset-stage-0` to install dev dependencies
+2. `npm i -D parcel-bundler babel-transform-class-properties` to install dev dependencies
 3. `npm i react react-dom` to install dependencies
 4. `"start": parcel index.html` add start script to `package.json`
 5. Create `.babelrc` file containing:
 
   ```js
   {
-      "presets": ["env", "react", "stage-0"]
+    "plugins": ["transform-class-properties"]
   }
   ```
-This will tell Parcel what Babel plugins to transpile your code with.
+  Parcel will automatically use Babel to transpile all ES6 and React syntax out of the box, but we want to use a new feature (class properties), so we need to tell Parcel to use an extra plugin.
 
 5. Create `index.html` file containing:
 
@@ -77,6 +77,8 @@ We want to be able to write modular code using the [ES Modules](https://develope
 
 Since browsers don't understand these things we need something to process our source files, transpile them with Babel and then bundle them together into files the browser understands.
 
+Parcel automatically uses the [`babel-preset-env`](https://babeljs.io/env/) and [`babel-preset-react`](https://babeljs.io/docs/plugins/preset-react/) presets to transpile ES6 and JSX. We've also added the `babel-plugin-transform-class-properties`(https://babeljs.io/docs/plugins/transform-class-properties/) plugin so we can write our class state without needing a constructor function.
+
 Your start script (`parcel index.html`) will tell Parcel to use the `index.html` file as an 'entrypoint'.
 
 This means Parcel will start there, find your JS file linked in a script tag, then follow the trail of `import`s until it has built up a 'tree' of your entire app.
@@ -92,6 +94,4 @@ You can open up the `dist` folder and look around. The JS Parcel produces will b
 ### Dependencies
 
 - `parcel-bundler`: will do the actual bundling
-- `babel-preset-env`: the 'standard' Babel preset for transpiling real JS
-- `babel-preset-react`: will transpile React specific stuff like JSX
-- `babel-preset-stage-0`: will transpile fun new proposals that aren't _technically_ in the language yet (like object spread and class instance properties)
+- `babel-plugin-transform-class-properties`: lets us write our state as an object directly on a class ([more info here](https://github.com/oliverjam/intro-react-workshop/blob/master/03-surpass-with-class/README.md#state))
