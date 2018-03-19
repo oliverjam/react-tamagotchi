@@ -1,23 +1,31 @@
 import React from 'react';
-import TamagotchiView from './tamagotchiView';
+
+export const Store = React.createContext();
 
 const DEC_INTERVAL = 6000;
 
-class Tamagotchi extends React.Component {
+export class Provider extends React.Component {
   state = {
     data: {},
     fetched: false,
     running: false,
     motivation: 0,
     burnout: false,
+    error: false,
   };
-  // passed to child as a prop so <Search /> can update the state here
-  // see https://reactjs.org/docs/lifting-state-up.html
   updateData = data => {
     if (data.error) {
       return this.setState({ error: true });
     }
     return this.setState({ data, fetched: true });
+  };
+  incrementMotivation = inc => {
+    if (this.state.motivation + inc > 5) {
+      return this.setState({ motivation: 5 });
+    }
+    this.setState(prevState => {
+      return { motivation: prevState.motivation + inc };
+    });
   };
   startTimer = () => {
     this.setState({ motivation: 5 });
@@ -38,17 +46,7 @@ class Tamagotchi extends React.Component {
       );
     }, DEC_INTERVAL);
   };
-  // passed to child so <Controls /> can update the state here
-  incrementMotivation = inc => {
-    if (this.state.motivation + inc > 5) {
-      return this.setState({ motivation: 5 });
-    }
-    this.setState(prevState => {
-      return { motivation: prevState.motivation + inc };
-    });
-  };
-  // called every time we receive props or state changes
-  componentDidUpdate() {
+  runGame = () => {
     // if the game is 'over' then don't start a timer
     if (this.state.burnout) return;
     // if we have data and aren't currently running then start
@@ -56,26 +54,31 @@ class Tamagotchi extends React.Component {
       this.setState({ running: true });
       this.startTimer();
     }
+  };
+  endGame = () => {
+    clearInterval(this.interval);
+  };
+  componentDidUpdate() {
+    this.runGame();
   }
   // called when React removes the component
   componentWillUnmount() {
     // stops the timer from continuing to run
-    clearInterval(this.interval);
+    this.endGame();
   }
   render() {
-    const { error, data: { name, login, img }, motivation, burnout } = this.state;
     return (
-      <TamagotchiView
-        error={error}
-        name={name || login}
-        motivation={motivation}
-        img={img}
-        incrementMotivation={this.incrementMotivation}
-        burnout={burnout}
-        updateData={this.updateData}
-      />
+      <Store.Provider
+        value={{
+          state: this.state,
+          updateData: this.updateData,
+          incrementMotivation: this.incrementMotivation,
+          runGame: this.runGame,
+          endGame: this.endGame,
+        }}
+      >
+        {this.props.children}
+      </Store.Provider>
     );
   }
 }
-
-export default Tamagotchi;
