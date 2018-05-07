@@ -19,6 +19,7 @@ Try to:
 ### Stretch goals
 
 - Save your state to localstorage so you can leave the page and come back later
+- Have a button to add more Tamagotchis
 - Make it look like a real Tamagotchi!
 
 ### Setup
