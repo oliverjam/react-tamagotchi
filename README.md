@@ -34,7 +34,7 @@ Try to:
 
 Check out our guide to setting up a React project with Parcel:
 
-### :sparkles: [CLICK ME](./docs/parcel-setup.md) :sparkles:
+### :sparkles: [CLICK ME](./docs/setup.md) :sparkles:
 
 ### Assets
 
