@@ -8,68 +8,78 @@ If you want to understand what everything does then have a look at the [what eve
 
 ### Install
 
-1. `npm init -y` to initialise your repo
-2. `npm i -D parcel-bundler babel-transform-class-properties` to install dev dependencies
-3. `npm i react react-dom` to install dependencies
-4. `"start": parcel index.html` add start script to `package.json`
-5. Create `.babelrc` file containing:
+1.  `npm init -y` to initialise your repo
+2.  `npm i -D parcel-bundler babel-transform-class-properties` to install dev dependencies
+3.  `npm i react react-dom` to install dependencies
+4.  `"start": parcel index.html` add start script to `package.json`
+5.  Create `.babelrc` file containing:
 
-  ```js
-  {
-    "plugins": ["transform-class-properties"]
-  }
-  ```
-  Parcel will automatically use Babel to transpile all ES6 and React syntax out of the box, but we want to use a new feature (class properties), so we need to tell Parcel to use an extra plugin.
 
-5. Create `index.html` file containing:
+```js
+{
+  "plugins": ["transform-class-properties"]
+}
+```
 
-  ```html
-  <!DOCTYPE html>
-  <html>
-    <head>
-      <meta charset="utf-8">
-      <title>My App</title>
-    </head>
-    <body>
-      <div id="root"></div>
-      <script src="index.js"></script>
-    </body>
-  </html>
-  ```
+Parcel will automatically use Babel to transpile all ES6 and React syntax out of the box, but we want to use a new feature (class properties), so we need to tell Parcel to use an extra plugin.
+
+5.  Create `index.html` file containing:
+
+
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="index.js"></script>
+  </body>
+</html>
+```
+
 Parcel will use this as an 'entrypoint' to your app. It'll find the `index.js` script in there and follow all the `import`s to bundle everything. Then it'll replace the `index.js` with the final JS bundle when it outputs the `dist` folder.
 
-6. Create `index.js` with your react setup:
+6.  Create `index.js` with your react setup:
 
-  ```js
-  import React from 'react'
-  import { render } from 'react-dom'
 
-  const App = () => <h1>Hello World</h1>
+```js
+import React from 'react';
+import { render } from 'react-dom';
 
-  render(
-    <App />,
-    document.getElementById('root')
-  )
-  ```
+const App = () => <h1>Hello World</h1>;
+
+render(<App />, document.getElementById('root'));
+```
+
+### Jest Setup
+
+We need a few extra things to get Jest working with our ES6+ and React code.
+
+1.  `npm i -D jest babel-jest babel-core` to install testing dependencies
+2.  `"test": jest --watch` add test script to `package.json`
+
+Jest will read the `.babelrc` file to know what presets/plugins it should use.
 
 ### Eslint Setup
 
-1. `npm i -D eslint eslint-config-recommended eslint-plugin-react babel-eslint` to install dev dependencies
-2. create `.eslintrc.json` file with:
+1.  `npm i -D eslint eslint-config-recommended eslint-plugin-react babel-eslint` to install dev dependencies
+2.  create `.eslintrc.json` file with:
+
 ```json
 {
   "parser": "babel-eslint",
-  "extends": [
-    "eslint:recommended",
-    "plugin:react/recommended"
-  ]
+  "extends": ["eslint:recommended", "plugin:react/recommended"]
 }
 ```
+
 This will tell ESlint to use `babel-parser` instead of its own. That way it won't complain about new things that Babel understands/transpiles away.
 
 We're just setting up the basic ESlint and React recommended presets. Feel free to extend with your own rules :)
 
-3. You may need to restart your editor
+3.  You may need to restart your editor
 
 ## What everything does
 
@@ -93,5 +103,5 @@ You can open up the `dist` folder and look around. The JS Parcel produces will b
 
 ### Dependencies
 
-- `parcel-bundler`: will do the actual bundling
-- `babel-plugin-transform-class-properties`: lets us write our state as an object directly on a class ([more info here](https://github.com/oliverjam/intro-react-workshop/blob/master/03-surpass-with-class/README.md#state))
+* `parcel-bundler`: will do the actual bundling
+* `babel-plugin-transform-class-properties`: lets us write our state as an object directly on a class ([more info here](https://github.com/oliverjam/intro-react-workshop/blob/master/03-surpass-with-class/README.md#state))
