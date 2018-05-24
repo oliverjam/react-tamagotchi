@@ -9,14 +9,14 @@ If you want to understand what everything does then have a look at the [what eve
 ### Install
 
 1.  `npm init -y` to initialise your repo
-2.  `npm i -D parcel-bundler babel-transform-class-properties` to install dev dependencies
+2.  `npm i -D parcel-bundler babel-preset-env babel-preset-react babel-transform-class-properties` to install dev dependencies
 3.  `npm i react react-dom` to install dependencies
 4.  `"start": parcel index.html` add start script to `package.json`
 5.  Create `.babelrc` file containing:
 
-
 ```js
 {
+  "presets": ["env", "react"],
   "plugins": ["transform-class-properties"]
 }
 ```
@@ -24,7 +24,6 @@ If you want to understand what everything does then have a look at the [what eve
 Parcel will automatically use Babel to transpile all ES6 and React syntax out of the box, but we want to use a new feature (class properties), so we need to tell Parcel to use an extra plugin.
 
 5.  Create `index.html` file containing:
-
 
 ```html
 <!DOCTYPE html>
@@ -44,7 +43,6 @@ Parcel will use this as an 'entrypoint' to your app. It'll find the `index.js` s
 
 6.  Create `index.js` with your react setup:
 
-
 ```js
 import React from 'react';
 import { render } from 'react-dom';
@@ -61,7 +59,7 @@ We need a few extra things to get Jest working with our ES6+ and React code.
 1.  `npm i -D jest babel-jest babel-core` to install testing dependencies
 2.  `"test": jest --watch` add test script to `package.json`
 
-Jest will read the `.babelrc` file to know what presets/plugins it should use.
+Jest will read the `.babelrc` file to know what presets/plugins it should use. Parcel actually defaults to using `babel-preset-env` and `babel-preset-react`, but Jest doesn't, which is why we had to install and specify them.
 
 ### Eslint Setup
 
