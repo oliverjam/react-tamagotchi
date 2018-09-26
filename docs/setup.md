@@ -9,7 +9,7 @@ If you want to understand what everything does then have a look at the [what eve
 ### Install
 
 1.  `npm init -y` to initialise your repo
-2.  `npm i -D parcel-bundler babel-preset-env babel-preset-react parcel-bundler babel-plugin-transform-class-properties` to install dev dependencies
+2.  `npm i -D parcel-bundler babel-preset-env babel-preset-react babel-plugin-transform-class-properties` to install dev dependencies
 3.  `npm i react react-dom` to install dependencies
 4.  `"start": parcel index.html` add start script to `package.json`
 5.  Create `.babelrc` file containing:
