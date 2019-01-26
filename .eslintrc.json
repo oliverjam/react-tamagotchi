@@ -1,10 +1,6 @@
 {
-  "parser": "babel-eslint",
-  "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "env": {
-    "browser": true
-  },
-  "rules": {
-    "react/prop-types": 0
-  }
+  "extends": [
+    "eslint:recommended",
+    "react-minimal"
+  ]
 }
