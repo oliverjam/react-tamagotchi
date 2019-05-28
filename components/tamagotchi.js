@@ -1,81 +1,71 @@
-import React from 'react';
-import TamagotchiView from './tamagotchiView';
+import React from "react";
+import TamagotchiView from "./tamagotchiView";
 
 const DEC_INTERVAL = 6000;
 
-class Tamagotchi extends React.Component {
-  state = {
-    data: {},
-    fetched: false,
-    running: false,
-    motivation: 0,
-    burnout: false,
-  };
-  // passed to child as a prop so <Search /> can update the state here
-  // see https://reactjs.org/docs/lifting-state-up.html
-  updateData = data => {
+function Tamagotchi() {
+  const [data, setData] = React.useState({});
+  const [fetched, setFetched] = React.useState(false);
+  const [error, setError] = React.useState(false);
+  const [running, setRunning] = React.useState(false);
+  const [motivation, setMotivation] = React.useState(5);
+  const [burnout, setBurnout] = React.useState(false);
+
+  const interval = React.useRef(null);
+
+  const updateData = data => {
     if (data.error) {
-      return this.setState({ error: true });
+      return setError(true);
     }
-    return this.setState({ data, fetched: true });
+    setData(data);
+    setFetched(true);
   };
-  startTimer = () => {
-    this.setState({ motivation: 5 });
+  const startTimer = () => {
+    setMotivation(5);
     // start a timer to reduce motivation by 1 every 5s
-    this.interval = setInterval(() => {
-      this.setState(
-        prevState => {
-          return { motivation: prevState.motivation - 1 };
-        },
-        // after our state update check if we're out of motivation
-        // if so we end the game and stop the timer
-        () => {
-          if (this.state.motivation < 1) {
-            this.setState({ burnout: true, running: false, motivation: 5 });
-            clearInterval(this.interval);
-          }
-        }
-      );
+    interval.current = setInterval(() => {
+      setMotivation(prevMotivation => prevMotivation - 1);
     }, DEC_INTERVAL);
   };
   // passed to child so <Controls /> can update the state here
-  incrementMotivation = inc => {
-    if (this.state.motivation + inc > 5) {
-      return this.setState({ motivation: 5 });
+  const incrementMotivation = inc => {
+    if (motivation + inc > 5) {
+      return setMotivation(5);
     }
-    this.setState(prevState => {
-      return { motivation: prevState.motivation + inc };
-    });
+    setMotivation(prevMotivation => prevMotivation + inc);
   };
-  // called every time we receive props or state changes
-  componentDidUpdate() {
-    // if the game is 'over' then don't start a timer
-    if (this.state.burnout) return;
-    // if we have data and aren't currently running then start
-    if (this.state.fetched && !this.state.running) {
-      this.setState({ running: true });
-      this.startTimer();
+  const reset = () => {
+    setBurnout(true);
+    setRunning(false);
+    setMotivation(5);
+    clearInterval(interval.current);
+  };
+  React.useEffect(() => {
+    if (motivation < 1) {
+      reset();
     }
-  }
-  // called when React removes the component
-  componentWillUnmount() {
-    // stops the timer from continuing to run
-    clearInterval(this.interval);
-  }
-  render() {
-    const { error, data: { name, login, img }, motivation, burnout } = this.state;
-    return (
-      <TamagotchiView
-        error={error}
-        name={name || login}
-        motivation={motivation}
-        img={img}
-        incrementMotivation={this.incrementMotivation}
-        burnout={burnout}
-        updateData={this.updateData}
-      />
-    );
-  }
+  }, [motivation]);
+  React.useEffect(() => {
+    // if the game is 'over' then don't start a timer
+    if (burnout) return;
+    // if we have data and aren't currently running then start
+    if (fetched && !running) {
+      setRunning(true);
+      startTimer();
+    }
+  }, [burnout, fetched, running]);
+  const { name, login, img } = data;
+  return (
+    <TamagotchiView
+      error={error}
+      name={name || login}
+      motivation={motivation}
+      img={img}
+      incrementMotivation={incrementMotivation}
+      burnout={burnout}
+      updateData={updateData}
+    />
+  );
 }
 
 export default Tamagotchi;
