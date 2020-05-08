@@ -8,7 +8,7 @@
   grid-template-rows: 75% auto;
   grid-gap: 1.5em;
   justify-items: center;
-  font-family: 'VT323';
+  font-family: "VT323";
   border-radius: 50% 50% 10em 10em;
   border-top-left-radius: 11em 15em;
   border-top-right-radius: 11em 15em;
@@ -26,7 +26,7 @@
 
 .tamagotchi::before {
   box-sizing: border-box;
-  content: '';
+  content: "";
   position: absolute;
   top: -1.2em;
   left: calc(50% - 1em);
@@ -38,7 +38,7 @@
 }
 
 .tamagotchi::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -1em;
   left: 5%;
@@ -141,10 +141,15 @@
   border: 1px solid hsla(220, 10%, 60%, 0.4);
   box-shadow: 0 2px 4px hsla(220, 20%, 20%, 0.6),
     0 0 8px hsla(50, 100%, 90%, 0.75);
-  filter: grayscale(0.8);
+  filter: grayscale(0.4);
   transition: transform 0.1s;
 }
 
-.tamagotchi__btn:active {
+.tamagotchi__btn:disabled {
+  box-shadow: 0 2px 4px hsla(220, 20%, 20%, 0.6);
+  filter: grayscale(0.8);
+}
+
+.tamagotchi__btn:active:not(:disabled) {
   transform: translateY(1px);
 }
