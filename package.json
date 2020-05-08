@@ -4,28 +4,31 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "parcel index.html",
-    "build": "parcel build index.html --public-url ./",
-    "lint": "eslint ."
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test"
   },
   "keywords": [],
   "author": "oliverjam",
   "repository": "https://github.com/oliverjam/fac-react-project/",
   "license": "ISC",
-  "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/preset-react": "^7.0.0",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.12.1",
-    "eslint-config-react-minimal": "^1.0.0",
-    "eslint-plugin-import": "^2.15.0",
-    "eslint-plugin-react": "^7.12.4",
-    "parcel-bundler": "^1.11.0"
-  },
   "dependencies": {
-    "react": "^16.9.0-alpha.0",
-    "react-dom": "^16.9.0-alpha.0"
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "react-scripts": "^3.4.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
