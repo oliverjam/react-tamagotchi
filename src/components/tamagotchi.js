@@ -1,5 +1,7 @@
 import React from "react";
-import TamagotchiView from "./tamagotchiView";
+import Screen from "./screen";
+import Controls from "./controls";
+import "./tamagotchi.style.css";
 
 const DEC_INTERVAL = 6000;
 
@@ -13,7 +15,7 @@ function Tamagotchi() {
 
   const interval = React.useRef(null);
 
-  const updateData = data => {
+  const updateData = (data) => {
     if (data.error) {
       return setError(true);
     }
@@ -24,15 +26,15 @@ function Tamagotchi() {
     setMotivation(5);
     // start a timer to reduce motivation by 1 every 5s
     interval.current = setInterval(() => {
-      setMotivation(prevMotivation => prevMotivation - 1);
+      setMotivation((prevMotivation) => prevMotivation - 1);
     }, DEC_INTERVAL);
   };
   // passed to child so <Controls /> can update the state here
-  const incrementMotivation = inc => {
+  const incrementMotivation = (inc) => {
     if (motivation + inc > 5) {
       return setMotivation(5);
     }
-    setMotivation(prevMotivation => prevMotivation + inc);
+    setMotivation((prevMotivation) => prevMotivation + inc);
   };
   const reset = () => {
     setBurnout(true);
@@ -54,17 +56,19 @@ function Tamagotchi() {
       startTimer();
     }
   }, [burnout, fetched, running]);
-  const { name, login, img } = data;
+  const { name, img } = data;
   return (
-    <TamagotchiView
-      error={error}
-      name={name || login}
-      motivation={motivation}
-      img={img}
-      incrementMotivation={incrementMotivation}
-      burnout={burnout}
-      updateData={updateData}
-    />
+    <div className="tamagotchi">
+      <Screen
+        error={error}
+        name={name}
+        img={img}
+        burnout={burnout}
+        motivation={motivation}
+        updateData={updateData}
+      />
+      <Controls burnout={burnout} incrementMotivation={incrementMotivation} />
+    </div>
   );
 }
 
