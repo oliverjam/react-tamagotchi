@@ -1,56 +1,45 @@
 import React from "react";
+import ErrorView from "./error";
 import Search from "./search";
 import MotivationBar from "./motivationBar";
 import skullIcon from "../assets/skull.svg";
 
-const ErrorView = () => (
-  <div className="tamagotchi__screen">
-    <div>There’s been a terrible mistake</div>
-    <img
-      className="tamagotchi__img"
-      src={skullIcon}
-      alt="A skull and crossbones"
-    />
-    <div>Please try again :)</div>
-  </div>
-);
+const Screen = ({ gameState, startGame, motivation }) => {
+  const [fetchState, setFetchState] = React.useState("initial");
+  const [data, setData] = React.useState({});
 
-const Screen = ({ error, name, img, burnout, motivation, updateData }) => {
-  // render a different view if there's a fetch error
-  if (error) return <ErrorView />;
+  if (fetchState === "initial")
+    return (
+      <Search
+        setData={setData}
+        setFetchState={setFetchState}
+        startGame={startGame}
+      />
+    );
+  if (fetchState === "loading") return <div>Loading...</div>;
+  if (fetchState === "error") return <ErrorView />;
+
+  if (gameState === "finished")
+    return (
+      <Profile name={data.name} img={skullIcon} motivation="They burnt out!" />
+    );
   return (
-    <div className="tamagotchi__screen">
-      {name ? (
-        <div className="tamagotchi__name">{name}</div>
-      ) : (
-        <Search updateParentState={updateData} />
-      )}
-      {burnout ? (
-        <span
-          className="tamagotchi__img"
-          role="img"
-          aria-label="They've burnt out!"
-        >
-          😵
-        </span>
-      ) : (
-        <img className="tamagotchi__img" src={img} alt="Their GitHub profile" />
-      )}
-      {
-        // we use '!!' to force motivation to be a boolean here
-        // otherwise we get '0' rendered as React will 'toString' it
-        !!motivation && (
-          <div className="tamagotchi__motivation">
-            {burnout ? (
-              `${name} has burnt out!`
-            ) : (
-              <MotivationBar health={motivation} />
-            )}
-          </div>
-        )
-      }
-    </div>
+    <Profile
+      name={data.name}
+      img={data.img}
+      motivation={<MotivationBar health={motivation} />}
+    />
   );
 };
+
+function Profile({ name, img, motivation }) {
+  return (
+    <>
+      <div className="tamagotchi__name">{name}</div>
+      <img className="tamagotchi__img" src={img} alt="" />
+      <div className="tamagotchi__motivation">{motivation}</div>
+    </>
+  );
+}
 
 export default Screen;

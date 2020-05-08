@@ -1,13 +1,21 @@
 import React from "react";
 import getUser from "../utils/getUser";
 
-function Search(props) {
+function Search({ setData, setFetchState, startGame }) {
   const handleSubmit = (e) => {
     e.preventDefault();
-    getUser(e.target.username.value).then((res) => {
-      const { name, login, avatar_url: img } = res;
-      props.updateParentState({ name, login, img });
-    });
+    setFetchState("loading");
+    getUser(e.target.username.value)
+      .then((res) => {
+        const { name, login, avatar_url: img } = res;
+        setFetchState("success");
+        setData({ name, login, img });
+        startGame();
+      })
+      .catch((error) => {
+        console.error(error);
+        setFetchState("error");
+      });
   };
 
   return (

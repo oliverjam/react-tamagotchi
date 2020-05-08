@@ -3,71 +3,51 @@ import Screen from "./screen";
 import Controls from "./controls";
 import "./tamagotchi.style.css";
 
-const DEC_INTERVAL = 6000;
+const DEC_INTERVAL = 1000;
 
 function Tamagotchi() {
-  const [data, setData] = React.useState({});
-  const [fetched, setFetched] = React.useState(false);
-  const [error, setError] = React.useState(false);
-  const [running, setRunning] = React.useState(false);
   const [motivation, setMotivation] = React.useState(5);
-  const [burnout, setBurnout] = React.useState(false);
+  const [gameState, setGameState] = React.useState("initial"); // "initial" | "running" | "finished"
 
-  const interval = React.useRef(null);
-
-  const updateData = (data) => {
-    if (data.error) {
-      return setError(true);
-    }
-    setData(data);
-    setFetched(true);
-  };
-  const startTimer = () => {
+  const startGame = () => {
+    setGameState("running");
     setMotivation(5);
-    // start a timer to reduce motivation by 1 every 5s
-    interval.current = setInterval(() => {
-      setMotivation((prevMotivation) => prevMotivation - 1);
+
+    const interval = setInterval(() => {
+      // this interval is only create once
+      // that means the motivation state value won't ever change
+      // we have to use the function form of state update
+      // so we have access to the up-to-date motivtion
+      setMotivation((prevMotivation) => {
+        if (prevMotivation < 1) {
+          setGameState("finished");
+          clearInterval(interval);
+          return 5;
+        } else {
+          return prevMotivation - 1;
+        }
+      });
     }, DEC_INTERVAL);
   };
-  // passed to child so <Controls /> can update the state here
-  const incrementMotivation = (inc) => {
-    if (motivation + inc > 5) {
-      return setMotivation(5);
-    }
-    setMotivation((prevMotivation) => prevMotivation + inc);
+
+  const addMotivation = (inc) => {
+    //Math.min means it'll never be over 5
+    setMotivation((prevMotivation) => Math.min(prevMotivation + inc, 5));
   };
-  const reset = () => {
-    setBurnout(true);
-    setRunning(false);
-    setMotivation(5);
-    clearInterval(interval.current);
-  };
-  React.useEffect(() => {
-    if (motivation < 1) {
-      reset();
-    }
-  }, [motivation]);
-  React.useEffect(() => {
-    // if the game is 'over' then don't start a timer
-    if (burnout) return;
-    // if we have data and aren't currently running then start
-    if (fetched && !running) {
-      setRunning(true);
-      startTimer();
-    }
-  }, [burnout, fetched, running]);
-  const { name, img } = data;
+
   return (
     <div className="tamagotchi">
-      <Screen
-        error={error}
-        name={name}
-        img={img}
-        burnout={burnout}
-        motivation={motivation}
-        updateData={updateData}
+      <div className="tamagotchi__screen">
+        <Screen
+          gameState={gameState}
+          motivation={motivation}
+          startGame={startGame}
+        />
+      </div>
+      <Controls
+        active={gameState === "running"}
+        addMotivation={addMotivation}
       />
-      <Controls burnout={burnout} incrementMotivation={incrementMotivation} />
     </div>
   );
 }

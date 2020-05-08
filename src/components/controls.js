@@ -1,27 +1,33 @@
-import React from 'react';
+import React from "react";
 
-const Controls = ({ burnout, incrementMotivation }) => (
+const Controls = ({ active, addMotivation }) => (
   <div className="tamagotchi__btn-group">
     <button
       className="tamagotchi__btn"
-      onClick={() => incrementMotivation(2)}
-      disabled={burnout}
+      onClick={() => addMotivation(2)}
+      disabled={!active}
     >
-      💜
+      <span role="img" aria-label="Like a tweet">
+        💜
+      </span>
     </button>
     <button
       className="tamagotchi__btn"
-      onClick={() => incrementMotivation(3)}
-      disabled={burnout}
+      onClick={() => addMotivation(3)}
+      disabled={!active}
     >
-      🐶
+      <span role="img" aria-label="Send a puppy pic">
+        🐶
+      </span>
     </button>
     <button
       className="tamagotchi__btn"
-      onClick={() => incrementMotivation(1)}
-      disabled={burnout}
+      onClick={() => addMotivation(1)}
+      disabled={!active}
     >
-      ⭐️
+      <span role="img" aria-label="Star a GitHub repo">
+        ⭐️
+      </span>
     </button>
   </div>
 );
