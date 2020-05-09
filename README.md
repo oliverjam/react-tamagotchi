@@ -7,5 +7,5 @@ A Github profile Tamagotchi built as an example for student projects in Founders
 ## Run locally
 
 1. Clone this repo
-1. `npm i`
-1. `npm run dev`
+1. `npm install`
+1. `npm start`
